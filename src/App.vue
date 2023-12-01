@@ -1,10 +1,23 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
+  <headerVue></headerVue>
   <router-view/>
+  <footerVue></footerVue>
 </template>
+
+<script>
+  import footerVue from './components/footer.vue'
+  import headerVue from './components/header.vue'
+
+
+  export default {
+    name: 'AppView',
+    components: {
+      footerVue,
+      headerVue
+    }
+  }
+</script>
+
 
 <style>
 #app {

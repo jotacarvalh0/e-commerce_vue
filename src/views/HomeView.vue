@@ -72,7 +72,7 @@
               <p class="nome-produto">{{ produto.title }}</p>
               <p class="categoria">{{ produto.category.name }}</p>
               <p class="preco">R$ {{ produto.price.toFixed(2).replace('.',',') }}</p>
-              <button class="no-carrinho">Adicionado</button>
+              <button class="no-carrinho" @click="postProduto(produto.id)">Adicionado</button>
             </div>
           </div>
       
@@ -111,6 +111,26 @@ export default {
       .then( data => {
         this.produtos = data
       }) 
+    },
+    postProduto(produtoId){
+      fetch(
+        'http://localhost:3000', {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ 
+            produtoId: produtoId,
+          }
+          ).then(
+            Response => {
+              if(!Response.ok){
+                console.log("Falha no POST.")
+              }return Response.json()
+            }
+          )
+        }
+      )
     }
   }
 }
