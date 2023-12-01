@@ -72,7 +72,7 @@
               <p class="nome-produto">{{ produto.title }}</p>
               <p class="categoria">{{ produto.category.name }}</p>
               <p class="preco">R$ {{ produto.price.toFixed(2).replace('.',',') }}</p>
-              <button class="no-carrinho" @click="postProduto(produto.id)">Adicionado</button>
+              <button class="no-carrinho" @click="adicionarAoCarrinho(produto)">Adicionado</button>
             </div>
           </div>
       
@@ -90,48 +90,75 @@ export default {
   data( ){
     return{
       categorias: [],
-      produtos: []
+      produtos: {},
+      categoriaSelecionada: null,
     }
   },
   created(){
-    this.fetchCategories(),
-    this.fetchProduto()
+    this.fetchCategories();
   },
   methods: {
-    fetchCategories(){
+    fetchCategories() {
       fetch('https://api.escuelajs.co/api/v1/categories')
-      .then( Response => Response.json() )
-      .then( data => {
-        this.categorias = data.filter(item => [1, 2, 4, 5].includes(item.id))
-      }) 
-    },
-    fetchProduto(){
-      fetch('https://api.escuelajs.co/api/v1/products?offset=0&limit=16')
-      .then( Response => Response.json() )
-      .then( data => {
-        this.produtos = data
-      }) 
-    },
-    postProduto(produtoId){
-      fetch(
-        'http://localhost:3000', {
-          method: 'POST',
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ 
-            produtoId: produtoId,
+        .then((response) => response.json())
+        .then((data) => {
+          this.categorias = data.filter((item) => [1, 2, 4, 5].includes(item.id));
+
+          // Chama o método filtrarPorCategoria com a primeira categoria como padrão
+          if (this.categorias.length > 0) {
+            this.filtrarPorCategoria(this.categorias[0].id);
           }
-          ).then(
-            Response => {
-              if(!Response.ok){
-                console.log("Falha no POST.")
-              }return Response.json()
-            }
-          )
-        }
-      )
-    }
+        })
+        .catch((error) => {
+          console.error('Erro ao obter categorias:', error);
+        });
+    },
+    fetchProduto(categoriaId = null) {
+      let url = 'https://api.escuelajs.co/api/v1/products?offset=0&limit=16';
+      if (categoriaId) {
+        url += `&category=${categoriaId}`;
+      }
+
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          this.produtos = data;
+        })
+        .catch((error) => {
+          console.error('Erro ao obter produtos:', error);
+        });
+    },
+    adicionarAoCarrinho(produto) {
+      // Aqui você envia a solicitação POST para adicionar o produto ao carrinho
+      fetch('http://localhost:3000/carrinho', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: produto.id,
+          title: produto.title,
+          image: produto.images,
+          categoria: produto.category.name,
+          preco: produto.price,
+
+
+          // Adicione outros campos do produto que deseja incluir no carrinho
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('Produto adicionado ao carrinho:', data);
+          // Atualizar o estado do seu componente se necessário
+        })
+        .catch((error) => {
+          console.error('Erro ao adicionar produto ao carrinho:', error);
+        });
+    },
+    filtrarPorCategoria(categoriaId = null) {
+      this.categoriaSelecionada = categoriaId;
+      this.fetchProduto(categoriaId);
+    },
   }
 }
 </script>

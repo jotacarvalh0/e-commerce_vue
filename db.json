@@ -1,19 +1,22 @@
 {
-  "posts": [
+  "carrinho": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
+      "id": 77,
+      "title": "Guess",
+      "image": [
+        "https://i.ebayimg.com/images/g/GZAAAOSwFLRkCrzf/s-l960.jpg"
+      ],
+      "categoria": "Furniture",
+      "preco": 565
+    },
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "id": 76,
+      "title": "Timex",
+      "image": [
+        "https://i.ebayimg.com/images/g/iCsAAOSwzjdlYkpr/s-l1600.jpg"
+      ],
+      "categoria": "Clothes",
+      "preco": 837
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }
