@@ -71,7 +71,7 @@
             <div class="detalhes">
               <p class="nome-produto">{{ produto.title }}</p>
               <p class="categoria">{{ produto.category.name }}</p>
-              <p class="preco">{{ produto.price }}</p>
+              <p class="preco">R$ {{ produto.price.toFixed(2).replace('.',',') }}</p>
               <button class="no-carrinho">Adicionado</button>
             </div>
           </div>
@@ -102,7 +102,7 @@ export default {
       fetch('https://api.escuelajs.co/api/v1/categories')
       .then( Response => Response.json() )
       .then( data => {
-        this.categorias = data
+        this.categorias = data.filter(item => [1, 2, 4, 5].includes(item.id))
       }) 
     },
     fetchProduto(){
@@ -115,3 +115,10 @@ export default {
   }
 }
 </script>
+
+<style>
+.produto img {
+  width: 286px;
+  height: 286px;
+}
+</style>
