@@ -51,26 +51,11 @@
       <div class="container">
         <h3>Categorias</h3>
         <div class="display-flex gap-8 text-align-center pt-16 pb-16">
-          <div>
-            <img src="https://fakeimg.pl/232x300/00fbdb/060707?text=IMAGEM+AQUI&font=bebas" alt="Categoria X">
-            <a href="/">Categoria X</a>
+          <div v-for="categoria in categorias" :key="categoria.id">
+            <img :src="categoria.image" alt="Categoria {{ categoria.name }}">
+            <a :href="`/${categoria.name}`">{{ categoria.name }}</a>
           </div>
-          <div>
-            <img src="https://fakeimg.pl/232x300/00fbdb/060707?text=IMAGEM+AQUI&font=bebas" alt="Categoria X">
-            <a href="/">Categoria Y</a>
-          </div>
-          <div>
-            <img src="https://fakeimg.pl/232x300/00fbdb/060707?text=IMAGEM+AQUI&font=bebas" alt="Categoria X">
-            <a href="/">Categoria Z</a>
-          </div>
-          <div>
-            <img src="https://fakeimg.pl/232x300/00fbdb/060707?text=IMAGEM+AQUI&font=bebas" alt="Categoria X">
-            <a href="/">Categoria W</a>
-          </div>
-          <div>
-            <img src="https://fakeimg.pl/232x300/00fbdb/060707?text=IMAGEM+AQUI&font=bebas" alt="Categoria X">
-            <a href="/">Categoria K</a>
-          </div>
+
         </div>
       </div>
     </div><!-- FIM DAS CATEGORIAS -->
@@ -81,25 +66,16 @@
         <h3>Produtos</h3>
         <div class="lista-produtos display-flex align-items-center flex-wrap-wrap gap-16 pt-16">
         
-          <div class="produto">
-            <img src="https://fakeimg.pl/284x284/060707/00fbdb?text=IMAGEM+AQUI&font=bebas" alt="Categoria X">
+          <div class="produto" v-for="produto in produtos" :key="produto.id">
+            <img :src="produto.images">
             <div class="detalhes">
-              <p class="nome-produto">Título do Produto</p>
-              <p class="categoria">Categoria</p>
-              <p class="preco">R$ 1929,59</p>
+              <p class="nome-produto">{{ produto.title }}</p>
+              <p class="categoria">{{ produto.category.name }}</p>
+              <p class="preco">{{ produto.price }}</p>
               <button class="no-carrinho">Adicionado</button>
             </div>
           </div>
-        
-          <div class="produto">
-            <img src="https://fakeimg.pl/284x284/060707/00fbdb?text=IMAGEM+AQUI&font=bebas" alt="Categoria X">
-            <div class="detalhes">
-              <p class="nome-produto">Título do Produto</p>
-              <p class="categoria">Categoria</p>
-              <p class="preco">R$ 1929,59</p>
-              <button class="carrinho">Adicionar ao Carrinho</button>
-            </div>
-          </div>
+      
         
         </div>
       </div>
@@ -110,6 +86,32 @@
 <script>
 
 export default {
-  name: 'HomeView'
+  name: 'HomeView',
+  data( ){
+    return{
+      categorias: [],
+      produtos: []
+    }
+  },
+  created(){
+    this.fetchCategories(),
+    this.fetchProduto()
+  },
+  methods: {
+    fetchCategories(){
+      fetch('https://api.escuelajs.co/api/v1/categories')
+      .then( Response => Response.json() )
+      .then( data => {
+        this.categorias = data
+      }) 
+    },
+    fetchProduto(){
+      fetch('https://api.escuelajs.co/api/v1/products?offset=0&limit=16')
+      .then( Response => Response.json() )
+      .then( data => {
+        this.produtos = data
+      }) 
+    }
+  }
 }
 </script>
