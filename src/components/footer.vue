@@ -1,6 +1,51 @@
 <template>
-    <div class="container">
-        <h1>Footer HEHEHe</h1>
+    <div>
+        <div class="banner-rodape pb-64">
+            <div class="container">
+                <img src="images/banner-rodape.webp" alt="Banner Rodapé">
+            </div>
+        </div>
+
+        <!-- NEWSLETTER -->
+        <div class="newsletter pt-32 pb-32">
+            <div class="container">
+                <div class="display-flex justify-content-space-between align-items-center">
+                    <div class="titulo">
+                        <p>CADASTRE-SE EM NOSSA NEWSLETTER</p>
+                        <p>e receba novidades e promoções</p>
+                    </div>
+                    <div class="form display-flex align-items-center gap-8">
+                        <input type="text" placeholder="Digite seu nome">
+                        <input type="email" placeholder="Digite seu email">
+                        <button>Inscreva-se</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="pt-32 pb-32">
+            <div class="container">
+                <div class="display-flex justify-content-space-between gap-32">
+                    <div class="logo">
+                        <img src="images/loja-rodape.png" alt="">
+                    </div>
+                    <div class="sobre">
+                        <h4>Sobre</h4>
+                        <p>Este projeto foi desenvolvido por os alunos do 4º perído de Sistemas de Informação na Disciplina de Frameworks Frontend, utilizando Vue.JS 3</p>
+                    </div>
+                    <div class="cartoes">
+                        <h4>Formas de Pagamento</h4>
+                        <img src="images/formas-cartoes.png">
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <div class="copyright text-align-center pt-16 pb-16">
+            <div class="container">
+            <small><strong>Desenvolvido por:</strong> Thaynan Sâmires, Pablo Nobre, José Neto - Uninassau - IV Período de Sistemas de Informação</small>
+            </div>
+        </div>
     </div>
 </template>
 
