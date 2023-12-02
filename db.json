@@ -1,22 +1,22 @@
 {
   "carrinho": [
     {
-      "id": 77,
-      "title": "Guess",
+      "id": 197,
+      "title": "Disney",
       "image": [
-        "https://i.ebayimg.com/images/g/GZAAAOSwFLRkCrzf/s-l960.jpg"
-      ],
-      "categoria": "Furniture",
-      "preco": 565
-    },
-    {
-      "id": 76,
-      "title": "Timex",
-      "image": [
-        "https://i.ebayimg.com/images/g/iCsAAOSwzjdlYkpr/s-l1600.jpg"
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3-XpjwenhAbH4EYd55aKiI7_YO4nWqqXXng&usqp=CAU"
       ],
       "categoria": "Clothes",
-      "preco": 837
+      "preco": 9000
+    },
+    {
+      "id": 270,
+      "title": "Rolex",
+      "image": [
+        "https://picsum.photos/640/480"
+      ],
+      "categoria": "Furniture",
+      "preco": 291
     }
   ]
 }

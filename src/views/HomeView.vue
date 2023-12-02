@@ -149,6 +149,7 @@ export default {
         .then((response) => response.json())
         .then((data) => {
           console.log('Produto adicionado ao carrinho:', data);
+          alert('Adicionado')
           // Atualizar o estado do seu componente se necessário
         })
         .catch((error) => {
